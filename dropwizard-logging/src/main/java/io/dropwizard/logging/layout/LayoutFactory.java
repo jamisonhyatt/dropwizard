@@ -1,10 +1,11 @@
 package io.dropwizard.logging.layout;
 
-import java.util.TimeZone;
-
 import ch.qos.logback.classic.LoggerContext;
+import ch.qos.logback.core.Layout;
 import ch.qos.logback.core.pattern.PatternLayoutBase;
 import ch.qos.logback.core.spi.DeferredProcessingAware;
+
+import java.util.TimeZone;
 
 /**
  * An interface for building Logback {@link PatternLayoutBase} layouts
@@ -19,4 +20,6 @@ public interface LayoutFactory<E extends DeferredProcessingAware> {
      * @return a new {@link PatternLayoutBase}
      */
     PatternLayoutBase<E> build(LoggerContext context, TimeZone timeZone);
+
+    Layout<E> buildJson(LoggerContext context, TimeZone timeZone, boolean includeStackTrace, boolean prettyPrint);
 }

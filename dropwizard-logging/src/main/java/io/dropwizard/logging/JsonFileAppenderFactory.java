@@ -3,14 +3,12 @@ package io.dropwizard.logging;
 import ch.qos.logback.classic.LoggerContext;
 import ch.qos.logback.core.Appender;
 import ch.qos.logback.core.FileAppender;
-import ch.qos.logback.core.Layout;
 import ch.qos.logback.core.encoder.LayoutWrappingEncoder;
 import ch.qos.logback.core.spi.DeferredProcessingAware;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import io.dropwizard.logging.async.AsyncAppenderFactory;
 import io.dropwizard.logging.filter.LevelFilterFactory;
-import io.dropwizard.logging.layout.JsonLayoutFactory;
 import io.dropwizard.logging.layout.LayoutFactory;
 
 /**
@@ -139,7 +137,7 @@ public class JsonFileAppenderFactory<E extends DeferredProcessingAware> extends 
         appender.setContext(context);
         final LayoutWrappingEncoder<E> layoutEncoder = new LayoutWrappingEncoder<>();
 
-        layoutEncoder.setLayout((Layout<E>) new JsonLayoutFactory().build(context, timeZone, includeStackTrace, prettyPrint));
+        layoutEncoder.setLayout(layoutFactory.buildJson(context, timeZone, includeStackTrace, prettyPrint));
         appender.setEncoder(layoutEncoder);
 
         appender.setPrudent(false);
