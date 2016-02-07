@@ -83,6 +83,15 @@ logging:
       archivedFileCount: 7
       timeZone: UTC
       maxFileSize: 10MB
+    - type: jsonFile
+      threshold: INFO
+      currentLogFilename: /tmp/applicationJson.log
+      archivedLogFilenamePattern: /tmp/applicationJson-%d{yyyy-MM-dd}-%i.log.gz
+      archivedFileCount: 7
+      timeZone: UTC
+      maxFileSize: 10MB
+      includeStackTrace: true
+      prettyPrint: true
 
 # the key needs to match the suffix of the renderer
 viewRendererConfiguration:
